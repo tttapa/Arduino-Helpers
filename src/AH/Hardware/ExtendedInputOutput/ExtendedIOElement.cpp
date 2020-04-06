@@ -52,8 +52,20 @@ pin_t ExtendedIOElement::getEnd() const { return end; }
 
 pin_t ExtendedIOElement::getStart() const { return start; }
 
-DoublyLinkedList<ExtendedIOElement> &ExtendedIOElement::getAll() {
-    return updatables;
+template <class T>
+bool inRange(T target, T start, T end) {
+    return target >= start && target < end;
+}
+
+ExtendedIOElement *ExtendedIOElement::getExtendedIOElementOfPin(pin_t pin) {
+    for (auto &u : updatables) {
+        auto &el = static_cast<ExtendedIOElement &>(u);
+        if (pin < el.getStart())
+            break;
+        else if (inRange(pin, el.getStart(), el.getEnd()))
+            return &el;
+    }
+    return nullptr;
 }
 
 pin_t ExtendedIOElement::offset = NUM_DIGITAL_PINS + NUM_ANALOG_INPUTS;

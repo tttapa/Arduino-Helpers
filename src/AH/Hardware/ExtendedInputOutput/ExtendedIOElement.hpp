@@ -251,9 +251,9 @@ class ExtendedIOElement : public UpdatableCRTP<ExtendedIOElement> {
     pin_t getStart() const;
 
     /**
-     * @brief   Get the list of all Extended IO elements.
+     * @brief   Find the Extended IOP element that the given pin belongs to.
      */
-    static DoublyLinkedList<ExtendedIOElement> &getAll();
+    static ExtendedIOElement *getExtendedIOElementOfPin(pin_t pin);
 
   private:
     const pin_t length;

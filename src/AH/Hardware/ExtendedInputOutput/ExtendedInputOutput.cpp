@@ -9,18 +9,10 @@ BEGIN_AH_NAMESPACE
 
 namespace ExtIO {
 
-template <class T>
-bool inRange(T target, T start, T end) {
-    return target >= start && target < end;
-}
-
 ExtendedIOElement &getIOElementOfPin(pin_t pin) {
-    for (auto &el : ExtendedIOElement::getAll())
-        if (pin < el.getStart())
-            break;
-        else if (inRange(pin, el.getStart(), el.getEnd()))
-            return el;
-
+    ExtendedIOElement *el = ExtendedIOElement::getExtendedIOElementOfPin(pin);
+    if (el)
+        return *el;
     FATAL_ERROR(
         F("The given pin does not correspond to an Extended IO element."),
         0x8888);
