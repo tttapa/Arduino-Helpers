@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 0d27e212ccbd1cd6cf10a049b2cf48312c0ca0e0 - src/AH/Hardware/FilteredAnalog.hpp</title>
+  <title>LCOV - 8b800a70b42bae992cca3807eff2f19b3ddd67b1 - src/AH/Hardware/FilteredAnalog.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">0d27e212ccbd1cd6cf10a049b2cf48312c0ca0e0</td>
+            <td class="headerValue">8b800a70b42bae992cca3807eff2f19b3ddd67b1</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">32</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-10-05 16:09:57</td>
+            <td class="headerValue">2021-02-19 00:34:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">26</td>
@@ -348,26 +348,36 @@
 <a name="278"><span class="lineNum">     278 </span>            :                                 FilterShiftFactor, FilterType, AnalogType,</a>
 <a name="279"><span class="lineNum">     279 </span><span class="lineCov">          6 :                                 IncRes&gt;(analogPin, nullptr, initial) {}</span></a>
 <a name="280"><span class="lineNum">     280 </span>            : </a>
-<a name="281"><span class="lineNum">     281 </span>            :     /// A function pointer to a mapping function to map analog values.</a>
-<a name="282"><span class="lineNum">     282 </span>            :     /// @see    map()</a>
-<a name="283"><span class="lineNum">     283 </span>            :     using MappingFunction = AnalogType (*)(AnalogType);</a>
-<a name="284"><span class="lineNum">     284 </span>            : </a>
-<a name="285"><span class="lineNum">     285 </span>            :     /**</a>
-<a name="286"><span class="lineNum">     286 </span>            :      * @brief   Invert the analog value. For example, if the precision is 10 </a>
-<a name="287"><span class="lineNum">     287 </span>            :      *          bits, when the analog input measures 1023, the output will be 0,</a>
-<a name="288"><span class="lineNum">     288 </span>            :      *          and when the analog input measures 0, the output will be 1023.</a>
-<a name="289"><span class="lineNum">     289 </span>            :      * </a>
-<a name="290"><span class="lineNum">     290 </span>            :      * @note    This overrides the mapping function set by the `map` method.</a>
-<a name="291"><span class="lineNum">     291 </span>            :      */</a>
-<a name="292"><span class="lineNum">     292 </span><span class="lineCov">          1 :     void invert() {</span></a>
-<a name="293"><span class="lineNum">     293 </span><span class="lineCov">          1 :         constexpr AnalogType maxval = FilteredAnalog::getMaxRawValue();</span></a>
-<a name="294"><span class="lineNum">     294 </span><span class="lineCov">         16 :         this-&gt;map([](AnalogType val) -&gt; AnalogType { return maxval - val; });</span></a>
-<a name="295"><span class="lineNum">     295 </span><span class="lineCov">          1 :     }</span></a>
-<a name="296"><span class="lineNum">     296 </span>            : };</a>
-<a name="297"><span class="lineNum">     297 </span>            : </a>
-<a name="298"><span class="lineNum">     298 </span>            : END_AH_NAMESPACE</a>
-<a name="299"><span class="lineNum">     299 </span>            : </a>
-<a name="300"><span class="lineNum">     300 </span>            : AH_DIAGNOSTIC_POP()</a>
+<a name="281"><span class="lineNum">     281 </span>            :     /**</a>
+<a name="282"><span class="lineNum">     282 </span>            :      * @brief   Construct a new FilteredAnalog object.</a>
+<a name="283"><span class="lineNum">     283 </span>            :      * </a>
+<a name="284"><span class="lineNum">     284 </span>            :      * **This constructor should not be used.**  </a>
+<a name="285"><span class="lineNum">     285 </span>            :      * It is just a way to easily create arrays of FilteredAnalog objects, and</a>
+<a name="286"><span class="lineNum">     286 </span>            :      * initializing them later. Trying to update a default-constructed or </a>
+<a name="287"><span class="lineNum">     287 </span>            :      * uninitialized FilteredAnalog object will result in a fatal runtime error.</a>
+<a name="288"><span class="lineNum">     288 </span>            :      */</a>
+<a name="289"><span class="lineNum">     289 </span>            :     FilteredAnalog() : FilteredAnalog(NO_PIN) {}</a>
+<a name="290"><span class="lineNum">     290 </span>            : </a>
+<a name="291"><span class="lineNum">     291 </span>            :     /// A function pointer to a mapping function to map analog values.</a>
+<a name="292"><span class="lineNum">     292 </span>            :     /// @see    map()</a>
+<a name="293"><span class="lineNum">     293 </span>            :     using MappingFunction = AnalogType (*)(AnalogType);</a>
+<a name="294"><span class="lineNum">     294 </span>            : </a>
+<a name="295"><span class="lineNum">     295 </span>            :     /**</a>
+<a name="296"><span class="lineNum">     296 </span>            :      * @brief   Invert the analog value. For example, if the precision is 10 </a>
+<a name="297"><span class="lineNum">     297 </span>            :      *          bits, when the analog input measures 1023, the output will be 0,</a>
+<a name="298"><span class="lineNum">     298 </span>            :      *          and when the analog input measures 0, the output will be 1023.</a>
+<a name="299"><span class="lineNum">     299 </span>            :      * </a>
+<a name="300"><span class="lineNum">     300 </span>            :      * @note    This overrides the mapping function set by the `map` method.</a>
+<a name="301"><span class="lineNum">     301 </span>            :      */</a>
+<a name="302"><span class="lineNum">     302 </span><span class="lineCov">          1 :     void invert() {</span></a>
+<a name="303"><span class="lineNum">     303 </span><span class="lineCov">          1 :         constexpr AnalogType maxval = FilteredAnalog::getMaxRawValue();</span></a>
+<a name="304"><span class="lineNum">     304 </span><span class="lineCov">         16 :         this-&gt;map([](AnalogType val) -&gt; AnalogType { return maxval - val; });</span></a>
+<a name="305"><span class="lineNum">     305 </span><span class="lineCov">          1 :     }</span></a>
+<a name="306"><span class="lineNum">     306 </span>            : };</a>
+<a name="307"><span class="lineNum">     307 </span>            : </a>
+<a name="308"><span class="lineNum">     308 </span>            : END_AH_NAMESPACE</a>
+<a name="309"><span class="lineNum">     309 </span>            : </a>
+<a name="310"><span class="lineNum">     310 </span>            : AH_DIAGNOSTIC_POP()</a>
 </pre>
       </td>
     </tr>
@@ -376,7 +386,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14-6-g40580cd</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.15</a></td></tr>
   </table>
   <br>
 

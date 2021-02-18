@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 0d27e212ccbd1cd6cf10a049b2cf48312c0ca0e0 - src/AH/PrintStream/PrintStream.hpp</title>
+  <title>LCOV - 8b800a70b42bae992cca3807eff2f19b3ddd67b1 - src/AH/PrintStream/PrintStream.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">0d27e212ccbd1cd6cf10a049b2cf48312c0ca0e0</td>
+            <td class="headerValue">8b800a70b42bae992cca3807eff2f19b3ddd67b1</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">4</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-10-05 16:09:57</td>
+            <td class="headerValue">2021-02-19 00:34:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -141,45 +141,56 @@
 <a name="71"><span class="lineNum">      71 </span>            : Setbytesep setbytesep(char bytesep);</a>
 <a name="72"><span class="lineNum">      72 </span>            : Print &amp;operator&lt;&lt;(Print &amp;printer, Setbytesep f);</a>
 <a name="73"><span class="lineNum">      73 </span>            : </a>
-<a name="74"><span class="lineNum">      74 </span>            : /// @}</a>
-<a name="75"><span class="lineNum">      75 </span>            : </a>
-<a name="76"><span class="lineNum">      76 </span>            : #ifndef ARDUINO</a>
-<a name="77"><span class="lineNum">      77 </span>            : </a>
-<a name="78"><span class="lineNum">      78 </span>            : #include &lt;iomanip&gt;</a>
-<a name="79"><span class="lineNum">      79 </span>            : #include &lt;iostream&gt;</a>
+<a name="74"><span class="lineNum">      74 </span>            : struct HexDump {</a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          1 :     HexDump(const uint8_t *data, size_t length)</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          1 :      : data(data), length(length) {}</span></a>
+<a name="77"><span class="lineNum">      77 </span>            :     const uint8_t *data;</a>
+<a name="78"><span class="lineNum">      78 </span>            :     size_t length;</a>
+<a name="79"><span class="lineNum">      79 </span>            : };</a>
 <a name="80"><span class="lineNum">      80 </span>            : </a>
-<a name="81"><span class="lineNum">      81 </span>            : // TODO: check conflicts between Arduino version and C++ STL version</a>
-<a name="82"><span class="lineNum">      82 </span>            : using std::endl;</a>
-<a name="83"><span class="lineNum">      83 </span>            : // using std::setbase;</a>
-<a name="84"><span class="lineNum">      84 </span>            : // using std::setprecision;</a>
-<a name="85"><span class="lineNum">      85 </span>            : using std::boolalpha;</a>
-<a name="86"><span class="lineNum">      86 </span>            : using std::dec;</a>
-<a name="87"><span class="lineNum">      87 </span>            : using std::flush;</a>
-<a name="88"><span class="lineNum">      88 </span>            : using std::hex;</a>
-<a name="89"><span class="lineNum">      89 </span>            : using std::noboolalpha;</a>
-<a name="90"><span class="lineNum">      90 </span>            : using std::noshowbase;</a>
-<a name="91"><span class="lineNum">      91 </span>            : using std::nouppercase;</a>
-<a name="92"><span class="lineNum">      92 </span>            : using std::showbase;</a>
-<a name="93"><span class="lineNum">      93 </span>            : using std::uppercase;</a>
-<a name="94"><span class="lineNum">      94 </span>            : </a>
-<a name="95"><span class="lineNum">      95 </span><span class="lineCov">          2 : inline std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, uint8_t u) {</span></a>
-<a name="96"><span class="lineNum">      96 </span>            :     // I'm lazy, I should probably implement one for uint8_t to get the leading</a>
-<a name="97"><span class="lineNum">      97 </span>            :     // zeros right</a>
-<a name="98"><span class="lineNum">      98 </span><span class="lineCov">          2 :     return os &lt;&lt; static_cast&lt;unsigned short&gt;(u);</span></a>
-<a name="99"><span class="lineNum">      99 </span>            : }</a>
-<a name="100"><span class="lineNum">     100 </span>            : </a>
-<a name="101"><span class="lineNum">     101 </span><span class="lineCov">         29 : inline std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os,</span></a>
-<a name="102"><span class="lineNum">     102 </span>            :                                 const __FlashStringHelper *s) {</a>
-<a name="103"><span class="lineNum">     103 </span><span class="lineCov">         29 :     return os &lt;&lt; reinterpret_cast&lt;const char *&gt;(s);</span></a>
-<a name="104"><span class="lineNum">     104 </span>            : }</a>
-<a name="105"><span class="lineNum">     105 </span>            : </a>
-<a name="106"><span class="lineNum">     106 </span>            : #endif</a>
-<a name="107"><span class="lineNum">     107 </span>            : </a>
-<a name="108"><span class="lineNum">     108 </span>            : END_AH_NAMESPACE</a>
+<a name="81"><span class="lineNum">      81 </span>            : Print &amp;operator&lt;&lt;(Print &amp;p, HexDump h);</a>
+<a name="82"><span class="lineNum">      82 </span>            : </a>
+<a name="83"><span class="lineNum">      83 </span>            : /// @}</a>
+<a name="84"><span class="lineNum">      84 </span>            : </a>
+<a name="85"><span class="lineNum">      85 </span>            : #ifndef ARDUINO</a>
+<a name="86"><span class="lineNum">      86 </span>            : </a>
+<a name="87"><span class="lineNum">      87 </span>            : #include &lt;iomanip&gt;</a>
+<a name="88"><span class="lineNum">      88 </span>            : #include &lt;iostream&gt;</a>
+<a name="89"><span class="lineNum">      89 </span>            : </a>
+<a name="90"><span class="lineNum">      90 </span>            : // TODO: check conflicts between Arduino version and C++ STL version</a>
+<a name="91"><span class="lineNum">      91 </span>            : using std::endl;</a>
+<a name="92"><span class="lineNum">      92 </span>            : // using std::setbase;</a>
+<a name="93"><span class="lineNum">      93 </span>            : // using std::setprecision;</a>
+<a name="94"><span class="lineNum">      94 </span>            : using std::boolalpha;</a>
+<a name="95"><span class="lineNum">      95 </span>            : using std::dec;</a>
+<a name="96"><span class="lineNum">      96 </span>            : using std::flush;</a>
+<a name="97"><span class="lineNum">      97 </span>            : using std::hex;</a>
+<a name="98"><span class="lineNum">      98 </span>            : using std::noboolalpha;</a>
+<a name="99"><span class="lineNum">      99 </span>            : using std::noshowbase;</a>
+<a name="100"><span class="lineNum">     100 </span>            : using std::nouppercase;</a>
+<a name="101"><span class="lineNum">     101 </span>            : using std::showbase;</a>
+<a name="102"><span class="lineNum">     102 </span>            : using std::uppercase;</a>
+<a name="103"><span class="lineNum">     103 </span>            : </a>
+<a name="104"><span class="lineNum">     104 </span>            : inline std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os, uint8_t u) {</a>
+<a name="105"><span class="lineNum">     105 </span>            :     // I'm lazy, I should probably implement one for uint8_t to get the leading</a>
+<a name="106"><span class="lineNum">     106 </span>            :     // zeros right</a>
+<a name="107"><span class="lineNum">     107 </span>            :     return os &lt;&lt; static_cast&lt;unsigned short&gt;(u);</a>
+<a name="108"><span class="lineNum">     108 </span>            : }</a>
 <a name="109"><span class="lineNum">     109 </span>            : </a>
-<a name="110"><span class="lineNum">     110 </span>            : AH_DIAGNOSTIC_POP()</a>
-<a name="111"><span class="lineNum">     111 </span>            : </a>
-<a name="112"><span class="lineNum">     112 </span>            : #endif // PrintStream_h</a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">         29 : inline std::ostream &amp;operator&lt;&lt;(std::ostream &amp;os,</span></a>
+<a name="111"><span class="lineNum">     111 </span>            :                                 const __FlashStringHelper *s) {</a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">         29 :     return os &lt;&lt; reinterpret_cast&lt;const char *&gt;(s);</span></a>
+<a name="113"><span class="lineNum">     113 </span>            : }</a>
+<a name="114"><span class="lineNum">     114 </span>            : </a>
+<a name="115"><span class="lineNum">     115 </span>            : std::ostream &amp;operator&lt;&lt;(std::ostream &amp;p, HexDump h);</a>
+<a name="116"><span class="lineNum">     116 </span>            : </a>
+<a name="117"><span class="lineNum">     117 </span>            : #endif</a>
+<a name="118"><span class="lineNum">     118 </span>            : </a>
+<a name="119"><span class="lineNum">     119 </span>            : END_AH_NAMESPACE</a>
+<a name="120"><span class="lineNum">     120 </span>            : </a>
+<a name="121"><span class="lineNum">     121 </span>            : AH_DIAGNOSTIC_POP()</a>
+<a name="122"><span class="lineNum">     122 </span>            : </a>
+<a name="123"><span class="lineNum">     123 </span>            : #endif // PrintStream_h</a>
 </pre>
       </td>
     </tr>
@@ -188,7 +199,7 @@
 
   <table width="100%" border=0 cellspacing=0 cellpadding=0>
     <tr><td class="ruler"><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
-    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.14-6-g40580cd</a></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.15</a></td></tr>
   </table>
   <br>
 
