@@ -72,6 +72,9 @@ template <class T>
 inline ArduinoPin_t arduino_pin_cast(T t) {
     return static_cast<ArduinoPin_t>(t);
 }
+inline ArduinoPin_t arduino_pin_cast(pin_t t) {
+    return t.pin;
+}
 END_AH_NAMESPACE
 
 AH_DIAGNOSTIC_POP()
