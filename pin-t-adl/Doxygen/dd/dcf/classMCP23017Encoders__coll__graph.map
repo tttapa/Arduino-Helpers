@@ -1,0 +1,6 @@
+<map id="MCP23017Encoders&lt; WireType, EncoderPositionType, InterruptSafe &gt;" name="MCP23017Encoders&lt; WireType, EncoderPositionType, InterruptSafe &gt;">
+<area shape="rect" id="node1" title="Class for reading 8 rotary encoders using a MCP23017 I²C port expander." alt="" coords="29,564,258,832"/>
+<area shape="rect" id="node2" href="$d6/dd0/structExtIO_1_1pin__t.html" title="Type for storing pin numbers of Extended Input/Output elements." alt="" coords="5,321,129,501"/>
+<area shape="rect" id="node3" href="$d7/d3d/classRegisterEncoders.html" title=" " alt="" coords="153,321,344,501"/>
+<area shape="rect" id="node4" href="$d7/d6a/structArray.html" title=" " alt="" coords="135,5,362,259"/>
+</map>
